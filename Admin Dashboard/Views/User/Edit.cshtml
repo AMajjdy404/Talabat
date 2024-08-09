@@ -1,0 +1,31 @@
+﻿@model UserRoleViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit @Model.UserName</h1>
+
+<div class="container">
+    <form method="post" action="Edit">
+        <input asp-for="Id" class="form-control" hidden />
+        <div class="form-group mt-2">
+            <label asp-for="UserName" class="col-form-label"></label>
+            <input asp-for="UserName" class="form-control" />
+        </div>
+        <h3>Manage User Roles</h3>
+        <hr />
+        @for (int i = 0; i < Model.Roles.Count; i++)
+        {
+            <div>
+                <input asp-for="Roles[i].IsSelected" type="checkbox" />
+                <label asp-for="Roles[i]" class="form-check-label">@Model.Roles[i].Name</label>
+                <input asp-for="Roles[i].Name" class="form-control" hidden />
+                <span asp-validation-for="Roles"></span>
+            </div>
+        }
+        <div class="input-group">
+            <button class="btn btn-success m-2" type="submit">Save</button>
+            <a class="btn btn-secondary m-2" asp-action="Index">Back To List</a>
+        </div>
+    </form>
+</div>
